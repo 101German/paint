@@ -1,1 +1,8 @@
-.Paint {}
+.container {
+    height: 100%;
+}
+
+.paint {
+    margin: 0 auto;
+    max-width: 762px;
+}
