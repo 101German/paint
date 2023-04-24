@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styles from './Paint.module.css';
+import './Paint.css';
 import Header from '../Header/Header';
 import PaintPanel from '../PaintPanel/PaintPanel';
 import {
@@ -13,10 +13,9 @@ import {
 interface PaintProps {}
 
 const Paint: FC<PaintProps> = () => (
-  <div className={styles.container}>
     <Routes>
       <Route path="/" element={
-        <div className={styles.paint}>
+        <div className="paint-container">
         <Header/>
         </div>
       }/>
@@ -24,7 +23,6 @@ const Paint: FC<PaintProps> = () => (
         <PaintPanel/>
       }/>
     </Routes>
-  </div>
 );
 
 export default Paint;
