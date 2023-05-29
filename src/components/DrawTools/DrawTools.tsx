@@ -3,10 +3,10 @@ import "./DrawTools.css";
 import { Option } from "../../Models/Option";
 
 interface DrawToolsProps {
-  handleOptionChange: (option: Option) => void
-  clearCanvas: () => void
-  publishDraw: () => void
-  options: Option
+  handleOptionChange: (option: Option) => void;
+  clearCanvas: () => void;
+  publishDraw: () => void;
+  options: Option;
 }
 const colorList = [
   "red",
@@ -40,16 +40,16 @@ const DrawTools: FC<DrawToolsProps> = ({
   const handleShapeSelect = (shape: string) => {
     const newOptions = Object.assign({}, options);
     if (newOptions.shape === shape) {
-      newOptions.shape = ''
+      newOptions.shape = "";
     } else {
       newOptions.shape = shape;
     }
-    handleOptionChange(newOptions)
-  }
+    handleOptionChange(newOptions);
+  };
 
-  const handleSizeOptionClick = (e: any) => {
+  const handleSizeOptionClick = (size: number) => {
     const newOptions = Object.assign({}, options);
-    newOptions.size = e.target.value;
+    newOptions.size = size;
     handleOptionChange(newOptions);
   };
 
@@ -67,8 +67,7 @@ const DrawTools: FC<DrawToolsProps> = ({
             height: "20px",
             padding: "1px",
             border: `1px solid ${colorItem}`,
-          }}
-        >
+          }}>
           <div
             key={colorItem}
             onClick={() => {
@@ -78,8 +77,7 @@ const DrawTools: FC<DrawToolsProps> = ({
               width: "20px",
               height: "20px",
               backgroundColor: `${colorItem}`,
-            }}
-          ></div>
+            }}></div>
         </div>
       );
     }
@@ -94,8 +92,7 @@ const DrawTools: FC<DrawToolsProps> = ({
           width: "20px",
           height: "20px",
           backgroundColor: `${colorItem}`,
-        }}
-      ></div>
+        }}></div>
     );
   });
 
@@ -107,19 +104,41 @@ const DrawTools: FC<DrawToolsProps> = ({
     <div className="tool-board">
       <p>Shapes: </p>
       <ul>
-        <li className={options.shape === "rectangle" ? "option-shape selected" : "option-shape"} onClick={() => { handleShapeSelect("rectangle") }}>
-          <svg width="30" height="25" xmlns="http://www.w3.org/2000/svg">
+        <li
+          className={
+            options.shape === "rectangle"
+              ? "option-shape selected"
+              : "option-shape"
+          }
+          onClick={() => {
+            handleShapeSelect("rectangle");
+          }}>
+          <svg width="30" height="25">
             <rect width="10" height="10" x="5" y="9" />
           </svg>
           <span>Rectangle</span>
         </li>
-        <li className={options.shape === "circle" ? "option-shape selected" : "option-shape"} onClick={() => { handleShapeSelect("circle") }}>
-          <svg width="30" height="25" xmlns="http://www.w3.org/2000/svg">
+        <li
+          className={
+            options.shape === "circle"
+              ? "option-shape selected"
+              : "option-shape"
+          }
+          onClick={() => {
+            handleShapeSelect("circle");
+          }}>
+          <svg width="30" height="25">
             <circle cx="10" cy="9" r="6" />
           </svg>
           <span>Circle</span>
         </li>
-        <li className={options.shape === "line" ? "option-shape selected" : "option-shape"} onClick={() => { handleShapeSelect("line") }}>
+        <li
+          className={
+            options.shape === "line" ? "option-shape selected" : "option-shape"
+          }
+          onClick={() => {
+            handleShapeSelect("line");
+          }}>
           <svg width="30" height="25">
             <line x1="0" y1="0" x2="20" y2="15" stroke="black" />
           </svg>
@@ -133,14 +152,16 @@ const DrawTools: FC<DrawToolsProps> = ({
         <select
           value={options.size}
           className="size-select"
-          onChange={handleSizeOptionClick}>
+          onChange={(e) => {
+            handleSizeOptionClick(Number(e.target.value));
+          }}>
           {sizeOptions}
         </select>
       </div>
       <button className="btn-clear" onClick={handleButtonClearClick}>
         Clear
       </button>
-      <button className="btn-clear" onClick={ publishDraw }>
+      <button className="btn-clear" onClick={publishDraw}>
         Publish
       </button>
     </div>

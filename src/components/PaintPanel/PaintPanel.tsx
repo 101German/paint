@@ -1,18 +1,14 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { FC, useEffect, useRef, useState } from "react";
 import "./PaintPanel.css";
 import DrawTools from "../DrawTools/DrawTools";
 import DrawBoard from "../DrawBoard/DrawBoard";
 import { Option } from "../../Models/Option";
-import { Draw } from "../../Models/Draw";
 import { addDoc, collection } from "firebase/firestore";
 import database, { auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router";
 
-interface PaintPanelProps {}
-
-const PaintPanel: FC<PaintPanelProps> = () => {
+const PaintPanel: FC = () => {
   const drawsCollectionRef = collection(database, "draws");
   const [options, setOptions] = useState({
     color: "green",
@@ -34,7 +30,7 @@ const PaintPanel: FC<PaintPanelProps> = () => {
   const clearCanvas = () => {
     const canvas = canvasRef.current;
     const ctx = canvasRef.current?.getContext("2d");
-    if (canvas != null) {
+    if (canvas !== null) {
       ctx?.clearRect(0, 0, canvas.width, canvas.height);
     }
   };
@@ -46,7 +42,6 @@ const PaintPanel: FC<PaintPanelProps> = () => {
 
   const publishDraw = () => {
     const url = canvasRef.current?.toDataURL() ?? "";
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     addDoc(drawsCollectionRef, {
       drawURL: url,
       authorName: userName

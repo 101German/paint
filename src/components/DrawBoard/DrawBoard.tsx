@@ -1,8 +1,6 @@
 import React, { FC, useEffect } from "react";
 import "./DrawBoard.css";
 import { Option } from "../../Models/Option";
-import { auth } from "../../config";
-import { onAuthStateChanged } from "firebase/auth";
 
 interface DrawBoardProps {
   options: Option;
@@ -35,114 +33,90 @@ const DrawBoard: FC<DrawBoardProps> = ({ options, canvasRef }) => {
     }
   }, [options]);
 
-  const handleMouseDown = (e: any) => {
-    startX = e.clientX;
-    startY = e.clientY;
-    console.log("point ", startX, startY)
-    isDraw = true;
-  };
-
-  const handleMouseUp = (e: any) => {
-    if (ctx !== null) {
-      ctx.stroke();
-      ctx.beginPath();
-      isDraw = false;
-    }
-  };
-
-  const handleMouseMove = (e: any) => {
+  const handleMouseMove = (clientX: number, clientY: number) => {
     if (isDraw) {
-      ctx?.lineTo(e.clientX - canvasOffsetX, e.clientY - canvasOffsetY);
+      ctx?.lineTo(clientX - canvasOffsetX, clientY - canvasOffsetY);
       ctx?.stroke();
     }
   };
 
-  const startDraw = (e: any) => {
-    startX = e.clientX - canvasOffsetX;
-    startY = e.clientY - canvasOffsetY;
+  const startDraw = (clientX: number, clientY: number) => {
+    startX = clientX - canvasOffsetX;
+    startY = clientY - canvasOffsetY;
     ctx?.beginPath();
     if (options.shape === "line") {
       ctx?.moveTo(startX, startY);
     }
     isDraw = true;
-  }
+  };
 
-  const drawRect = (e: any) => {
+  const drawRect = (clientX: number, clientY: number) => {
     if (isDraw) {
-      console.log("x , y", startX, startY)
-      const mouseX = e.clientX - canvasOffsetX;
-      const mouseY = e.clientY - canvasOffsetY;
-      console.log("mouse x,y", mouseX, mouseY)
-
+      const mouseX = clientX - canvasOffsetX;
+      const mouseY = clientY - canvasOffsetY;
       rectWidth = mouseX - startX;
       rectHeight = mouseY - startY;
-
-      if (ctx != null) {
+      if (ctx !== null) {
         ctx.beginPath();
         ctx.rect(startX, startY, rectWidth, rectHeight);
       }
     }
-  }
+  };
 
-  const drawArc = (e: any) => {
-    const mouseX = e.clientX - canvasOffsetX;
+  const drawArc = (clientX: number) => {
+    const mouseX = clientX - canvasOffsetX;
     const r = Math.abs(mouseX - startX);
     ctx?.beginPath();
     ctx?.arc(startX, startY, r, 0, 2 * Math.PI);
-  }
-
-  const drawLine = (e: any) => {
-    const mouseX = e.clientX - canvasOffsetX;
-    const mouseY = e.clientY - canvasOffsetY;
-    //ctx?.lineTo(mouseX, mouseY);
-  }
+  };
 
   const stopDraw = () => {
     isDraw = false;
-    if (ctx != null) {
+    if (ctx !== null) {
       ctx.stroke();
     }
-  }
+  };
 
-  const stopDrawLine = (e: any) => {
-    const mouseX = e.clientX - canvasOffsetX;
-    const mouseY = e.clientY - canvasOffsetY;
+  const stopDrawLine = (clientX: number, clientY: number) => {
+    const mouseX = clientX - canvasOffsetX;
+    const mouseY = clientY - canvasOffsetY;
     ctx?.lineTo(mouseX, mouseY);
     ctx?.stroke();
     isDraw = false;
-  }
+  };
 
   return (
     <div className="drawing-board">
       <canvas
         ref={canvasRef}
         className="draw-payload"
-        onMouseDown={startDraw}
-        onMouseUp={ (e) => {
+        onMouseDown={(e) => {
+          startDraw(e.clientX, e.clientY);
+        }}
+        onMouseUp={(e) => {
           if (options.shape === "line") {
-            stopDrawLine(e)
+            stopDrawLine(e.clientX, e.clientY);
           } else {
-            stopDraw()
+            stopDraw();
           }
         }}
         onMouseMove={(e) => {
           switch (options.shape) {
             case "rectangle":
-              drawRect(e);
+              drawRect(e.clientX, e.clientY);
               break;
             case "circle":
-              drawArc(e);
+              drawArc(e.clientX);
               break;
             case "line":
               break;
             default:
-              handleMouseMove(e);
+              handleMouseMove(e.clientX, e.clientY);
               break;
           }
         }}
         width="739px"
-        height="450px"
-      ></canvas>
+        height="450px"></canvas>
     </div>
   );
 };

@@ -15,13 +15,10 @@ import SignUpForm from "../SignUpForm/SignUpForm";
 import { auth } from "../../config";
 import { onAuthStateChanged } from "firebase/auth";
 
-interface PaintProps {}
-
-const Paint: FC<PaintProps> = () => {
+const Paint: FC = () => {
   const navigate = useNavigate();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log("USER ", user);
       if (user == null) {
         navigate("/sign-in")
       }

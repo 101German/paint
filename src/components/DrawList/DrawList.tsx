@@ -13,7 +13,7 @@ class Draw {
 }
 
 const DrawList: FC<DrawListProps> = () => {
-  const [draws, setDraws] = useState([] as Draw[]);
+  const [draws, setDraws] = useState<Draw[]>([]);
   const drawsCollectionRef = collection(database, "draws")
   const getDraws = async () => {
     const data = await getDocs(drawsCollectionRef);
@@ -22,7 +22,7 @@ const DrawList: FC<DrawListProps> = () => {
   }
 
   useEffect(() => {
-    void getDraws().then((res: Draw[]) => {
+    getDraws().then((res: Draw[]) => {
       setDraws(res)
     })
   }, [])

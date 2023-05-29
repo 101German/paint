@@ -10,8 +10,6 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-console.log("Store: ", store.getState());
-
 root.render(
   <BrowserRouter>
   <Provider store={store}>

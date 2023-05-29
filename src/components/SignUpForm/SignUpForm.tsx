@@ -4,13 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../config";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-interface SignUpFormProps {}
-
-const SignUpForm: FC<SignUpFormProps> = () => {
+const SignUpForm: FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
@@ -27,13 +24,11 @@ const SignUpForm: FC<SignUpFormProps> = () => {
     setUserName(event.currentTarget.value);
   };
 
-  const handleSubmit: any = async () => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         fetch("https://localhost:7199/Auth/AddClaim", {
           method: "POST",
           headers: {
@@ -45,11 +40,10 @@ const SignUpForm: FC<SignUpFormProps> = () => {
             name: userName,
           }),
         }).then(() => {
-          // eslint-disable-next-line @typescript-eslint/no-floating-promises
           signInWithEmailAndPassword(auth, email, password).then(
             (userCredential) => {
               const user = userCredential.user;
-              console.log("new ", user)
+              console.log("new ", user);
               if (user !== null) {
                 navigate("/");
               }
@@ -66,13 +60,16 @@ const SignUpForm: FC<SignUpFormProps> = () => {
   };
 
   return (
-    <form className="sign-form" onSubmit={handleSubmit}>
+    <form
+      className="sign-form"
+      onSubmit={async (e) => {
+        await handleSubmit(e);
+      }}>
       <p className="form-title">Sign Up</p>
       <div className="form-group">
         <input
           className="form-input"
           type="text"
-          placeholder=" "
           value={userName}
           onChange={handleUserNameChange}
         />
@@ -82,7 +79,6 @@ const SignUpForm: FC<SignUpFormProps> = () => {
         <input
           className="form-input"
           type="text"
-          placeholder=" "
           value={email}
           onChange={handleEmailChange}
         />
@@ -92,7 +88,6 @@ const SignUpForm: FC<SignUpFormProps> = () => {
         <input
           className="form-input"
           type="password"
-          placeholder=" "
           value={password}
           onChange={handlePasswordChange}
         />

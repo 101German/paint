@@ -2,9 +2,7 @@ import React, { FC } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
-interface HeaderProps {}
-
-const Header: FC<HeaderProps> = () => (
+const Header: FC = () => (
   <div className="header">
     <p className="paint-logo">Paint</p>
     <Link to="/draw">
