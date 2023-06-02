@@ -24,6 +24,7 @@
     box-shadow: -1px 1px 10px #f6f6f6;
     border-radius: 10px;
     margin-bottom: 10px;
+    background-image: url("../../");
 }
 
 .draw-img{

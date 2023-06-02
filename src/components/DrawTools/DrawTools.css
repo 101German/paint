@@ -52,3 +52,9 @@
 .selected {
   color: #f07f05;
 }
+
+.shape{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}

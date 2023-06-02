@@ -113,9 +113,10 @@ const DrawTools: FC<DrawToolsProps> = ({
           onClick={() => {
             handleShapeSelect("rectangle");
           }}>
-          <svg width="30" height="25">
+          {/* <svg width="30" height="25">
             <rect width="10" height="10" x="5" y="9" />
-          </svg>
+          </svg> */}
+          <img src="rectangle-svgrepo-com.svg" className="shape"/>
           <span>Rectangle</span>
         </li>
         <li
@@ -127,9 +128,10 @@ const DrawTools: FC<DrawToolsProps> = ({
           onClick={() => {
             handleShapeSelect("circle");
           }}>
-          <svg width="30" height="25">
+          {/* <svg width="30" height="25">
             <circle cx="10" cy="9" r="6" />
-          </svg>
+          </svg> */}
+          <img src="circle-svgrepo-com.svg" className="shape"/>
           <span>Circle</span>
         </li>
         <li
@@ -139,9 +141,10 @@ const DrawTools: FC<DrawToolsProps> = ({
           onClick={() => {
             handleShapeSelect("line");
           }}>
-          <svg width="30" height="25">
+          {/* <svg width="30" height="25">
             <line x1="0" y1="0" x2="20" y2="15" stroke="black" />
-          </svg>
+          </svg> */}
+          <img src="line-svgrepo-com.svg" className="shape"/>
           <span>Line</span>
         </li>
       </ul>
