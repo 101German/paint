@@ -1,11 +1,11 @@
-import React from 'react';
-import './App.css';
-import Paint from './components/Paint/Paint';
+import React from "react";
+import "./App.css";
+import Paint from "./components/Paint/Paint";
 
-function App() {
+function App () {
   return (
     <div className="App">
-      <Paint/>
+      <Paint />
     </div>
   );
 }

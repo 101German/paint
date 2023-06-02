@@ -1,14 +1,14 @@
 .paint-panel {
-    display: flex;
-    gap: 20px;
-    height: 450px;
-    padding: 10px;
+  display: flex;
+  gap: 20px;
+  height: 450px;
+  padding: 10px;
 }
 
 .paint-panel-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    background-color: #60a4e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #60a4e8;
 }

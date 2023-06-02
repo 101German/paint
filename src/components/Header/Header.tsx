@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import React, { FC } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
-interface HeaderProps {}
-
-const Header: FC<HeaderProps> = () => (
+const Header: FC = () => (
   <div className="header">
     <p className="paint-logo">Paint</p>
-      <Link to="/draw"><button className="draw-button">Draw</button></Link>
+    <Link to="/draw">
+      <button className="draw-button">Draw</button>
+    </Link>
   </div>
 );
 

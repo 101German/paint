@@ -1,4 +1,5 @@
 .paint-container {
-    margin: 0 auto;
-    max-width: 762px;
+  margin: 0 auto;
+  height: 100%;
+  max-width: 762px;
 }

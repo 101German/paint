@@ -1,50 +1,60 @@
 .tool-board {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: 450px;
-    width: 210px;
-    padding: 10px;
-    box-shadow: 0px 0px 1px black;
-    border-radius: 10px;
-    background-color: #fff;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 450px;
+  width: 210px;
+  padding: 10px;
+  box-shadow: 0px 0px 1px black;
+  border-radius: 10px;
+  background-color: #fff;
+  box-sizing: border-box;
 }
 
 .option-shape {
-    cursor: pointer;
-    list-style: none;
-    display: flex;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
 }
 
 .color-panel {
-    display: flex;
-    gap: 0px 10px;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: #d2d2d2;
-    border-radius: 10px;
+  display: flex;
+  gap: 0px 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #d2d2d2;
+  border-radius: 10px;
 }
 
 .size-select {
-    font-size: 15px;
-    width: 125px;
-    border-radius: 5px;
+  font-size: 15px;
+  width: 125px;
+  border-radius: 5px;
 }
 
 .btn-clear {
-    margin-top: auto;
-    margin-bottom: 5px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    color: #fff;
-    background-color: #f07f05;
-    font-size: 20px;
-    outline: none;
-    cursor: pointer;
-    transition: 0.3s;
+  margin-top: auto;
+  margin-bottom: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  background-color: #f07f05;
+  font-size: 20px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.selected {
+  color: #f07f05;
+}
+
+.shape{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
